@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peer Tutoring Guide</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .slide-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 60px;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .slide-content {
+        flex: 1;
+    }
+
+    .icon {
+        text-align: center;
+        font-size: 64px;
+        margin-bottom: 20px;
+    }
+
+    h1 {
+        font-size: 42px;
+        color: #1e293b;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 28px;
+        color: #64748b;
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: 400;
+    }
+
+    .content-box {
+        background: #f8fafc;
+        border-left: 5px solid #3b82f6;
+        padding: 24px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+    }
+
+    .content-box h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+        color: #1e293b;
+    }
+
+    .content-box p {
+        color: #475569;
+        line-height: 1.7;
+        font-size: 16px;
+    }
+
+    .content-box.green {
+        border-left-color: #22c55e;
+        background: #f0fdf4;
+    }
+
+    .content-box.blue {
+        border-left-color: #3b82f6;
+        background: #eff6ff;
+    }
+
+    .content-box.purple {
+        border-left-color: #a855f7;
+        background: #faf5ff;
+    }
+
+    .content-box.yellow {
+        border-left-color: #eab308;
+        background: #fefce8;
+    }
+
+    .content-box.orange {
+        border-left-color: #f97316;
+        background: #fff7ed;
+    }
+
+    .content-box.pink {
+        border-left-color: #ec4899;
+        background: #fdf2f8;
+    }
+
+    .content-box.red {
+        border-left-color: #ef4444;
+        background: #fef2f2;
+    }
+
+    .content-box.indigo {
+        border-left-color: #6366f1;
+        background: #eef2ff;
+    }
+
+    ul {
+        list-style: none;
+        margin-top: 10px;
+    }
+
+    ul li {
+        padding: 12px 0 12px 35px;
+        position: relative;
+        color: #475569;
+        line-height: 1.7;
+    }
+
+    ul li:before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #a855f7;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 2px solid #e2e8f0;
+    }
+
+    button {
+        padding: 14px 28px;
+        font-size: 16px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    button:hover:not(:disabled) {
+        background: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+
+    button:disabled {
+        background: #cbd5e1;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    .dots {
+        display: flex;
+        gap: 10px;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #cbd5e1;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+        padding: 0;
+    }
+
+    .dot.active {
+        background: #3b82f6;
+        transform: scale(1.2);
+    }
+
+    .dot:hover {
+        background: #94a3b8;
+        transform: scale(1.1);
+    }
+
+    .slide-counter {
+        text-align: center;
+        margin-top: 20px;
+        color: #64748b;
+        font-size: 14px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .final-message {
+        font-size: 20px;
+        color: #475569;
+        margin: 30px 0;
+        line-height: 1.8;
+    }
+
+    .highlight-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 40px;
+        border-radius: 12px;
+        margin: 30px 0;
+        color: white;
+    }
+
+    .highlight-box h3 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .highlight-box p {
+        font-size: 18px;
+        line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+        .slide-container {
+            padding: 30px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+        }
+
+        h2 {
+            font-size: 22px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="slide-container">
+            <div class="slide-content" id="slideContent"></div>
+            <div class="navigation">
+                <button id="prevBtn" onclick="previousSlide()">
+                    ← Previous
+                </button>
+                <div class="dots" id="dots"></div>
+                <button id="nextBtn" onclick="nextSlide()">
+                    Next →
+                </button>
+            </div>
+            <div class="slide-counter" id="counter"></div>
+        </div>
+    </div>
+    <script>
+    let currentSlide = 0;
+
+    const slides = [{
+            content: `
+                    <div class="text-center">
+                        <div class="icon">👥</div>
+                        <h1>Welcome UP Peer Tutors!</h1>
+                        <h2>Your Guide to Effective Tutoring</h2>
+                        <p class="final-message">Thank you for joining our peer tutoring program!<br>
+                        This presentation will help you become an effective tutor and support your fellow students.</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">#Goals 🎯</div>
+                    <h1>Goals of Peer Tutoring</h1>
+                    <div class="content-box blue">
+                        <h3>Build Confidence</h3>
+                        <p>Create a safe space where students feel comfortable asking questions</p>
+                    </div>
+                    <div class="content-box green">
+                        <h3>Academic Support</h3>
+                        <p>Help students understand difficult concepts and improve their grades</p>
+                    </div>
+                    <div class="content-box purple">
+                        <h3>Develop Study Skills</h3>
+                        <p>Teach strategies that students can use independently</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">💡</div>
+                    <h1>Step 1: Fostering Connection</h1>
+                    <div class="content-box orange">
+                        <h3>Build positive a relationship with your student</h3>
+                        <p>Ask about their interests outside of school</p>
+                        <p>Ask about their STRENGTHS and where they feel confident</p>
+                        <p>Ask where they feel they need help and how they would like support</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">💡</div>
+                    <h1>Step 2: Review Grades</h1>
+                    <h2>Communication & Connection</h2>
+                    <div class="content-box yellow">
+                        <h3>Start with a Check-In</h3>
+                        <p>Review thier grades on powerschool. Note both good grades and grades that can use improvement</p>
+                    </div>
+                    <div class="content-box yellow">
+                        <h3>Look at assignments in missing classes</h3>
+                        <p>Find assignments that have not been done or are marked missing. Ask if the teacher accepts late work. Have them write some emails to their teachers asking if they can make up the work</p>
+                    </div>
+                    <div class="content-box yellow">
+                        <h3>Look at upcoming work</h3>
+                        <p>What homeworks tests and projects do they have coming up? Ask them how they track their assignments? If they don't know, perhaps show them how to use a planner.</p>
+                    </div>
+                    <div class="content-box yellow">
+                        <h3>Make a plan</h3>
+                        <p>Make a plan for next session so you can hit the group running. What should you spend your 30 minutes working on?</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">💡</div>
+                    <h1>Effective Tutoring Strategies</h1>
+                    <h2>Teaching Techniques</h2>
+                    <div class="content-box blue">
+                        <h3>Ask Questions, Don't Just Tell</h3>
+                        <p>Guide them to the answer with questions like "What do you think the first step is?"</p>
+                    </div>
+                    <div class="content-box blue">
+                        <h3>Show Them How to Use Their Resources</h3>
+                        <p>When you DON'T know something, how can someone independently find the information they need? Google classroom? Textbook? Do they know where to look?</p>
+                    </div>
+                    <div class="content-box blue">
+                        <h3>Work Through Problems Together</h3>
+                        <p>Do one problem together, then have them try one while you watch</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">💡</div>
+                    <h1>Effective Tutoring Strategies</h1>
+                    <h2>Study Skills & Independence</h2>
+                    <div class="content-box green">
+                        <h3>Teach Study Strategies</h3>
+                        <p>Share note-taking methods, flashcards, practice tests, and memory tricks</p>
+                    </div>
+                    <div class="content-box green">
+                        <h3>Help Them Self-Correct</h3>
+                        <p>Ask "How can you check if that's right?" to build independence. Don't have them just ask you.</p>
+                    </div>
+                    <div class="content-box green">
+                        <h3>End with a Summary</h3>
+                        <p>Ask them to explain what they learned in their own words</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <h1>What NOT to Do</h1>
+                    <div class="content-box red">
+                        <h3>Don't Do the Work for Them</h3>
+                        <p>They need to learn, not just get the right answer</p>
+                    </div>
+                    <div class="content-box red">
+                        <h3>Don't Rush</h3>
+                        <p>Everyone learns at their own pace</p>
+                    </div>
+                    <div class="content-box red">
+                        <h3>Don't Make Them Feel Bad</h3>
+                        <p>Avoid phrases like "that's easy" or "you should know this"</p>
+                    </div>
+                    <div class="content-box red">
+                        <h3>Don't Pretend to Know Everything</h3>
+                        <p>It's okay to say "I'm not sure, let's figure it out together"</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">📋</div>
+                    <h1>Tracking Grades & Attendance</h1>
+                    <h2>Why It Matters</h2>
+                    <div class="content-box purple">
+                        <h3>Shows Progress</h3>
+                        <p>Helps you and your tutee see improvement over time</p>
+                    </div>
+                    <div class="content-box blue">
+                        <h3>Accountability</h3>
+                        <p>Keeps both of you committed to regular sessions</p>
+                    </div>
+                    <div class="content-box green">
+                        <h3>Program Evaluation</h3>
+                        <p>Helps coordinators see if the program is working</p>
+                    </div>
+                    <div class="content-box orange">
+                        <h3>Identify Patterns</h3>
+                        <p>Notice which topics need more focus or when attendance drops</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="icon">📋</div>
+                    <h1>How to Track Attendance</h1>
+                    <div class="content-box">
+                        <h3>Record Attendance Before Session:</h3>
+                        <ul>
+                            <li>Go to the Google Sheet <a href='https://docs.google.com/spreadsheets/d/1crSzUlNQJQbDKQRIF1x3p1U2hFh7L5tOKSl5YTdo4jM/edit?usp=sharing'>"Peer Tutoring Attendance"</a></li>
+                            <li>Enter P for present or A for Absent</li>
+                            <li>If your student doesn't come in 10 minute you can go to lunch</li>
+                        </ul>
+                    </div>
+                    <div class="content-box blue">
+                        <h3>After 2 Absences...</h3>
+                        <p>Let Mr. Siegel know. Student might be removed from program. This is a PRIVLEDGE for them.</p>
+                    </div>
+                `
+        },
+        {
+            content: `
+                    <div class="text-center">
+                        <div class="icon">🌟</div>
+                        <h1>You've Got This!</h1>
+                        <p class="final-message">Remember: You don't have to be perfect.<br>You just need to care and try your best.</p>
+                        <div class="highlight-box">
+                            <h3>Key Takeaways</h3>
+                            <p>Be patient, ask questions, celebrate progress, and keep good records.<br><br>Your support makes a real difference!</p>
+                        </div>
+                        <p class="final-message"><strong>Questions? Ask your program coordinator anytime.</strong></p>
+                    </div>
+                `
+        }
+    ];
+
+    function showSlide(index) {
+        currentSlide = index;
+        document.getElementById('slideContent').innerHTML = slides[index].content;
+        updateNavigation();
+        updateDots();
+        updateCounter();
+    }
+
+    function updateNavigation() {
+        document.getElementById('prevBtn').disabled = currentSlide === 0;
+        document.getElementById('nextBtn').disabled = currentSlide === slides.length - 1;
+    }
+
+    function updateDots() {
+        const dotsContainer = document.getElementById('dots');
+        dotsContainer.innerHTML = '';
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (index === currentSlide ? ' active' : '');
+            dot.onclick = () => showSlide(index);
+            dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateCounter() {
+        document.getElementById('counter').textContent =
+            `Slide ${currentSlide + 1} of ${slides.length}`;
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            showSlide(currentSlide + 1);
+        }
+    }
+
+    function previousSlide() {
+        if (currentSlide > 0) {
+            showSlide(currentSlide - 1);
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') previousSlide();
+    });
+
+    // Initialize
+    showSlide(0);
+    </script>
+</body>
+
+</html>
